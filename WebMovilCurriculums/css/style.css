@@ -1,0 +1,99 @@
+body {
+    background-color: #e2eef5;
+    color: #1971c2;
+    font-family: "Open Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+a {
+  color: #0563bb;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #067ded;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+}
+
+img {
+  border: none;
+  box-shadow: #dce1e6 3px 13px 15px;
+}
+
+button {
+    border-radius: 100px;
+    margin-bottom: 10px;
+}
+
+.btn-primary-modern-light {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white; 
+    color:#1971c2; 
+    border-color:#d8eef8;
+    font-size: 25px; 
+    font-family: "Raleway", sans-serif;
+    font-weight: bold; 
+    text-align: right;
+    border-radius: 15px;
+    box-shadow: #dfe2e4 3px 3px 5px;
+    max-width: 300px;
+}
+
+/*///////////////////// CARROUSEL //////////////////////*/
+
+.contenido {
+    width: 100;
+}
+
+.carrousel {
+    display: grid;
+    grid-auto-flow: column;
+    scroll-behavior: auto;
+    gap: 1.2rem;
+    overflow-y: auto;
+    overflow-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: 1.7rem;
+}
+
+.carrousel::-webkit-scrollbar {
+    display: flex;
+}
+
+.card {
+    scroll-snap-align: start;
+    border-radius: 30px;
+    min-height: 200px;
+    min-width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #b6cbdb, #fdfdfd);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+p {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/*///////////////////// FIN CARROUSEL //////////////////////*/
+
+  
