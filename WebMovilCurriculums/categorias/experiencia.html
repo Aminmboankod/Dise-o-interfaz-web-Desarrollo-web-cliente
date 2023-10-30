@@ -13,13 +13,17 @@
     <script src="js/script.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+      <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
     
 <title>Currículum</title>
 </head>
 <body class="body d-flex flex-column">
     <nav class="navbar navbar-expand-md bg-light navbar-light sticky-top" id="navMenu">
         <a class="navbar-brand" href="../index.html">
-            <img src="../img/amin.png" alt="Logo" style="width:40px;">
+            <img class="rounded-circle" src="../img/amin.png" alt="Logo" style="width:40px;">
         </a>
     
         <!-- Cambiamos el botón a un botón de dropdown -->
@@ -78,20 +82,34 @@
                     </button>
                 </div>
                 <article>
-                    <p style="text-align: left; width: 100%;">
-                        Soy responsable y comprometido 
-                        con mi trabajo y me tomo muy 
-                        en serio cada proyecto en el 
-                        que me involucro.
+                    <div id="accordion">
     
-                        Me considero un aprendiz 
-                        constante y disfruto resolviendo 
-                        retos. Soy colaborador 
-                        entusiasta y valoro trabajar en 
-                        equipo porque creo que la 
-                        sinergía de ideas y habilidades 
-                        potencia los resultados.
-                    </p>
+                        <div class="card">
+                          <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                                <i class="bi bi-pc-display"></i>
+                                <span>Desarrollador web</span>
+                            </a>
+                          </div>
+                          <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                            <div class="card-body">
+                                <h5>OkDicom</h3>
+                                <h6>- Abril 2022 - Actualidad</h2>
+                                <ul>
+                                    <li>
+                                        Desarrollo de aplicaciones web con Blazor y .NET
+                                    </li>
+                                    <li>
+                                        Soluciones DICOM para el secto médico
+                                    </li>
+                                    <li>
+                                        Usos de potocolos de comunicación paa imagen médica
+                                    </li>
+                                </ul>
+                            </div>
+                          </div>
+                        </div>          
+                      </div>
                 </article>
             </div>
         </div>
