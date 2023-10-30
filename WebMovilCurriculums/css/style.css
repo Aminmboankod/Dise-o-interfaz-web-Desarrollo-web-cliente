@@ -52,8 +52,9 @@ button {
     text-align: right;
     border-radius: 15px;
     box-shadow: #dfe2e4 3px 3px 5px;
-    max-width: 300px;
+    
 }
+
 
 /*///////////////////// CARROUSEL //////////////////////*/
 
@@ -96,4 +97,32 @@ p {
 
 /*///////////////////// FIN CARROUSEL //////////////////////*/
 
+
+/*///////////////////// DROPDOWNMENU //////////////////////*/
+
+#dropdownMenuButton {
+  background-color: #a5d8ff; 
+  color:#1971c2; 
+  font-size: 25px; 
+  font-weight: bold; 
+  text-align: right;
+  border-radius: 6px;
+  margin-bottom: 0;
+  border: none;
+  
+  border-end-end-radius: 0;
+  border-end-start-radius: 0;
+}
+
+.custom-dropdown {
+background-color: #a5d8ff;
+border-radius: 15px;
+margin-top:0;
+border:none;
+box-shadow: -8px 8px 8px rgba(82, 154, 190, 0.336);
+height: 52vh; /* 100% de la altura de la pantalla */
+right: 0; /* Alineado a la derecha */
+left: auto; /* Alineado a la derecha */
+border-top-right-radius: 0;
+}
   
