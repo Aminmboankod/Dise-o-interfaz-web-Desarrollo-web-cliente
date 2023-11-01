@@ -18,3 +18,17 @@ function validateForm() {
 
   return true;
 }
+
+function togglePasswordVisibility() {
+  var passwordField = document.getElementById("password");
+
+  if (passwordField.type === "text") {
+      passwordField.type = "password";
+  }
+}
+
+function updatePasswordValue() {
+  var passwordInput = document.getElementById("password");
+  var hiddenPassword = passwordInput.value.replace(/./g, '*'); // Reemplaza cada carácter por un asterisco
+  passwordInput.value = hiddenPassword;
+}
