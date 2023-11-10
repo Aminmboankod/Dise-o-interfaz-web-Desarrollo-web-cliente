@@ -1,36 +1,4 @@
 
-const NAME = document.forms["registrationForm"]["name"].value;
-const SURNAME1 = document.forms["registrationForm"]["surname1"].value;
-const SURNAME2 = document.forms["registrationForm"]["surname2"].value;
-const GENDER = document.forms["registrationForm"]["gender"].value;
-const POSTALADDRESS = document.forms["registrationForm"]["address"].value;
-const CP = document.forms["registrationForm"]["cp"].value;
-const DNI = document.forms["registrationForm"]["dni"].value;
-const EMAIL = document.forms["registrationForm"]["email"].value;
-const MOBILE = document.forms["registrationForm"]["mobile"].value;
-const BIRTHDATE = document.forms["registrationForm"]["birthdate"].value;
-const PLACEOFBIRTH = document.forms["registrationForm"]["birthplace"].value;
-const MARITALSTATUS = document.forms["registrationForm"]["maritalStatus"].value;
-const EMPLOYEENUMB = document.forms["registrationForm"]["employeeNumber"].value;
-const USER = document.forms["registrationForm"]["user"].value;
-const PASSWORD = document.forms["registrationForm"]["password"].value;
-const DEPARTMENT = document.forms["registrationForm"]["department"].value;
-const STARTDATE = document.forms["registrationForm"]["startDate"].value;
-const WORKHOURS = document.forms["registrationForm"]["workHours"].value;
-const LEVELEDUCATION = document.forms["registrationForm"]["educationLevel"].value;
-const ENGLISH = document.forms["registrationForm"]["englishLevel"].value;
-const CATALAN = document.forms["registrationForm"]["catalanLevel"].value;
-const SPANISH = document.forms["registrationForm"]["spanishLevel"].value;
-const OTHERS = document.forms["registrationForm"]["otherLanguages"].value;
-const CARD = document.forms["registrationForm"]["cardType"].value;
-const CARDNUMBER = document.forms["registrationForm"]["cardNumber"].value;
-const CVC = document.forms["registrationForm"]["cvc"].value;
-const EXPIRATIONDATE = document.forms["registrationForm"]["expirationDate"].value;
-const COLOR = document.forms["registrationForm"]["color"].value;
-const SOCIAL = document.forms["registrationForm"]["socialLinks"].value;
-const COMMENTS = document.forms["registrationForm"]["comments"].value;
-
-
 function createCSV() {
     const data = `
         Nombre,Primer Apellido,Segundo Apellido,Género,DNI,Código Postal,Estado Civil,Employee Number,User,Departamento,Start Date
@@ -60,20 +28,49 @@ const LEVEL = {
 	NATIVE: 'Native'
 }
 
-async function validateForm() {
-    if (validarInputs()) {
-        await mostrarDatos();
-        createCSV();
+function validateForm() {
+    if (validarInputs())
+    {
+        mostrarDatos();
         return true;
-    } else {
-        alert("Algunos campos no son válidos. Por favor, corrígelos.");
-        return false;
     }
-	
+    return false;
 }
 
 
-async function mostrarDatos() {
+function mostrarDatos() {
+
+    const NAME = document.forms["registrationForm"]["name"].value;
+    const SURNAME1 = document.forms["registrationForm"]["surname1"].value;
+    const SURNAME2 = document.forms["registrationForm"]["surname2"].value;
+    const GENDER = document.forms["registrationForm"]["gender"].value;
+    const POSTALADDRESS = document.forms["registrationForm"]["address"].value;
+    const CP = document.forms["registrationForm"]["cp"].value;
+    const DNI = document.forms["registrationForm"]["dni"].value;
+    const EMAIL = document.forms["registrationForm"]["email"].value;
+    const MOBILE = document.forms["registrationForm"]["mobile"].value;
+    const BIRTHDATE = document.forms["registrationForm"]["birthdate"].value;
+    const PLACEOFBIRTH = document.forms["registrationForm"]["birthplace"].value;
+    const MARITALSTATUS = document.forms["registrationForm"]["maritalStatus"].value;
+    const EMPLOYEENUMB = document.forms["registrationForm"]["employeeNumber"].value;
+    const USER = document.forms["registrationForm"]["user"].value;
+    const PASSWORD = document.forms["registrationForm"]["password"].value;
+    const DEPARTMENT = document.forms["registrationForm"]["department"].value;
+    const STARTDATE = document.forms["registrationForm"]["startDate"].value;
+    const WORKHOURS = document.forms["registrationForm"]["workHours"].value;
+    const LEVELEDUCATION = document.forms["registrationForm"]["educationLevel"].value;
+    const ENGLISH = document.forms["registrationForm"]["englishLevel"].value;
+    const CATALAN = document.forms["registrationForm"]["catalanLevel"].value;
+    const SPANISH = document.forms["registrationForm"]["spanishLevel"].value;
+    const OTHERS = document.forms["registrationForm"]["otherLanguages"].value;
+    const CARD = document.forms["registrationForm"]["cardType"].value;
+    const CARDNUMBER = document.forms["registrationForm"]["cardNumber"].value;
+    const CVC = document.forms["registrationForm"]["cvc"].value;
+    const EXPIRATIONDATE = document.forms["registrationForm"]["expirationDate"].value;
+    const COLOR = document.forms["registrationForm"]["color"].value;
+    const SOCIAL = document.forms["registrationForm"]["socialLinks"].value;
+    const COMMENTS = document.forms["registrationForm"]["comments"].value;
+
     const dataString = `
         <h2>Datos del formulario:</h2>
         <p><strong>Nombre:</strong> ${NAME}</p>
@@ -121,6 +118,10 @@ async function mostrarDatos() {
  * @returns {boolean} Returns true if all input fields are valid, false otherwise.
  */
 function validarInputs() {
+    const form = document.getElementById('form');
+    var formulario = new FormData('form');
+
+    var inputs = formulario.forEach(i => i.text);
 	var isValid = true;
 	isValid = isValid && validarGenero();
 	isValid = isValid && validarTextoSimple();
@@ -241,13 +242,13 @@ function validarEmail() {
  * @returns {boolean} Returns true if the phone number is valid, false otherwise.
  */
 function validarTelefono() {
-    const phone = document.getElementById('phone');
+    const phone = document.getElementById('mobile');
     const regex = /^[0-9]{9}$/; // Expresión regular que permite 9 dígitos.
     if (!regex.test(phone.value)) {
-        setErrorMessage('El teléfono debe contener 9 dígitos.', 'phone');
+        setErrorMessage('El teléfono debe contener 9 dígitos.', 'mobile');
         return false;
     } else {
-        setErrorMessage('', 'phone');
+        setErrorMessage('', 'mobile');
         return true;
     }
 }
@@ -263,6 +264,7 @@ function validarFNacimiento() {
     let regex = /^(\d{2})-(\d{2})-(\d{4})$/;
     if (!regex.test(birthday.value)) {
         setErrorMessage('La fecha debe ser válida (dd-MM-yyyy).', 'birthdate');
+        
         return false;
     }
 
@@ -370,11 +372,11 @@ function validarNivelIdioma(id) {
     const englishLevelInput = document.getElementById(id);
     const englishLevelValue = englishLevelInput.value;
 
-    if (Object.values(ENGLISH).includes(englishLevelValue)) {
+    if (Object.values(LEVEL).includes(englishLevelValue)) {
         setErrorMessage('', id);
         return true;
     } else {
-        setErrorMessage('El nivel de inglés no es correcto.', id);
+        setErrorMessage('El nivel de idioma no existe.', id);
         return false;
     }
 }
