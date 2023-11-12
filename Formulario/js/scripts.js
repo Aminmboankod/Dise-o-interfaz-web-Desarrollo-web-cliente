@@ -37,92 +37,90 @@ function validateForm() {
     return false;
 }
 
-
 function mostrarDatos() {
+    if (validarInputs())
+    {
+        var NAME = document.forms["registrationForm"]["name"].value;
+        var SURNAME1 = document.forms["registrationForm"]["surname1"].value;
+        var SURNAME2 = document.forms["registrationForm"]["surname2"].value;
+        var GENDER = document.forms["registrationForm"]["gender"].value;
+        var POSTALADDRESS = document.forms["registrationForm"]["address"].value;
+        var CP = document.forms["registrationForm"]["cp"].value;
+        var DNI = document.forms["registrationForm"]["dni"].value;
+        var EMAIL = document.forms["registrationForm"]["email"].value;
+        var MOBILE = document.forms["registrationForm"]["mobile"].value;
+        var BIRTHDATE = document.forms["registrationForm"]["birthdate"].value;
+        var PLACEOFBIRTH = document.forms["registrationForm"]["birthplace"].value;
+        var MARITALSTATUS = document.forms["registrationForm"]["maritalStatus"].value;
+        var EMPLOYEENUMB = document.forms["registrationForm"]["employeeNumber"].value;
+        var USER = document.forms["registrationForm"]["user"].value;
+        var PASSWORD = document.forms["registrationForm"]["password"].value;
+        var DEPARTMENT = document.forms["registrationForm"]["department"].value;
+        var STARTDATE = document.forms["registrationForm"]["startDate"].value;
+        var WORKHOURS = document.forms["registrationForm"]["workHours"].value;
+        var LEVELEDUCATION = document.forms["registrationForm"]["educationLevel"].value;
+        var ENGLISH = document.forms["registrationForm"]["englishLevel"].value;
+        var CATALAN = document.forms["registrationForm"]["catalanLevel"].value;
+        var SPANISH = document.forms["registrationForm"]["spanishLevel"].value;
+        var OTHERS = document.forms["registrationForm"]["otherLanguages"].value;
+        var CARD = document.forms["registrationForm"]["cardType"].value;
+        var CARDNUMBER = document.forms["registrationForm"]["cardNumber"].value;
+        var CVC = document.forms["registrationForm"]["cvc"].value;
+        var EXPIRATIONDATE = document.forms["registrationForm"]["expirationDate"].value;
+        var COLOR = document.forms["registrationForm"]["color"].value;
+        var SOCIAL = document.forms["registrationForm"]["socialLinks"].value;
+        var COMMENTS = document.forms["registrationForm"]["comments"].value;
 
-    const NAME = document.forms["registrationForm"]["name"].value;
-    const SURNAME1 = document.forms["registrationForm"]["surname1"].value;
-    const SURNAME2 = document.forms["registrationForm"]["surname2"].value;
-    const GENDER = document.forms["registrationForm"]["gender"].value;
-    const POSTALADDRESS = document.forms["registrationForm"]["address"].value;
-    const CP = document.forms["registrationForm"]["cp"].value;
-    const DNI = document.forms["registrationForm"]["dni"].value;
-    const EMAIL = document.forms["registrationForm"]["email"].value;
-    const MOBILE = document.forms["registrationForm"]["mobile"].value;
-    const BIRTHDATE = document.forms["registrationForm"]["birthdate"].value;
-    const PLACEOFBIRTH = document.forms["registrationForm"]["birthplace"].value;
-    const MARITALSTATUS = document.forms["registrationForm"]["maritalStatus"].value;
-    const EMPLOYEENUMB = document.forms["registrationForm"]["employeeNumber"].value;
-    const USER = document.forms["registrationForm"]["user"].value;
-    const PASSWORD = document.forms["registrationForm"]["password"].value;
-    const DEPARTMENT = document.forms["registrationForm"]["department"].value;
-    const STARTDATE = document.forms["registrationForm"]["startDate"].value;
-    const WORKHOURS = document.forms["registrationForm"]["workHours"].value;
-    const LEVELEDUCATION = document.forms["registrationForm"]["educationLevel"].value;
-    const ENGLISH = document.forms["registrationForm"]["englishLevel"].value;
-    const CATALAN = document.forms["registrationForm"]["catalanLevel"].value;
-    const SPANISH = document.forms["registrationForm"]["spanishLevel"].value;
-    const OTHERS = document.forms["registrationForm"]["otherLanguages"].value;
-    const CARD = document.forms["registrationForm"]["cardType"].value;
-    const CARDNUMBER = document.forms["registrationForm"]["cardNumber"].value;
-    const CVC = document.forms["registrationForm"]["cvc"].value;
-    const EXPIRATIONDATE = document.forms["registrationForm"]["expirationDate"].value;
-    const COLOR = document.forms["registrationForm"]["color"].value;
-    const SOCIAL = document.forms["registrationForm"]["socialLinks"].value;
-    const COMMENTS = document.forms["registrationForm"]["comments"].value;
+        var dataString = `
+            <h2>Datos del formulario:</h2>
+            <p><strong>Nombre:</strong> ${NAME}</p>
+            <p><strong>Primer Apellido:</strong> ${SURNAME1}</p>
+            <p><strong>Segundo Apellido:</strong> ${SURNAME2}</p>
+            <p><strong>Género:</strong> ${GENDER}</p>
+            <p><strong>DNI:</strong> ${DNI}</p>
+            <p><strong>Código Postal:</strong> ${CP}</p>
+            <p><strong>Estado Civil:</strong> ${MARITALSTATUS}</p>
+            <p><strong>Número de empleado:</strong> ${EMPLOYEENUMB}</p>
+            <p><strong>Usuario:</strong> ${USER}</p>
+            <p><strong>Departamento:</strong> ${DEPARTMENT}</p>
+            <p><strong>Fecha de inicio:</strong> ${STARTDATE}</p>
+            <p><strong>Dirección Postal:</strong> ${POSTALADDRESS}</p>
+            <p><strong>Correo Electrónico:</strong> ${EMAIL}</p>
+            <p><strong>Teléfono Móvil:</strong> ${MOBILE}</p>
+            <p><strong>Fecha de Nacimiento:</strong> ${BIRTHDATE}</p>
+            <p><strong>Lugar de Nacimiento:</strong> ${PLACEOFBIRTH}</p>
+            <p><strong>Contraseña:</strong> ${PASSWORD}</p>
+            <p><strong>Horas de Trabajo:</strong> ${WORKHOURS}</p>
+            <p><strong>Nivel de Educación:</strong> ${LEVELEDUCATION}</p>
+            <p><strong>Inglés:</strong> ${ENGLISH}</p>
+            <p><strong>Catalán:</strong> ${CATALAN}</p>
+            <p><strong>Español:</strong> ${SPANISH}</p>
+            <p><strong>Otros Idiomas:</strong> ${OTHERS}</p>
+            <p><strong>Tipo de Tarjeta:</strong> ${CARD}</p>
+            <p><strong>Número de Tarjeta:</strong> ${CARDNUMBER}</p>
+            <p><strong>CVC:</strong> ${CVC}</p>
+            <p><strong>Fecha de Expiración:</strong> ${EXPIRATIONDATE}</p>
+            <p><strong>Color:</strong> ${COLOR}</p>
+            <p><strong>Enlaces Sociales:</strong> ${SOCIAL}</p>
+            <p><strong>Comentarios:</strong> ${COMMENTS}</p>
+        `;
 
-    const dataString = `
-        <h2>Datos del formulario:</h2>
-        <p><strong>Nombre:</strong> ${NAME}</p>
-        <p><strong>Primer Apellido:</strong> ${SURNAME1}</p>
-        <p><strong>Segundo Apellido:</strong> ${SURNAME2}</p>
-        <p><strong>Género:</strong> ${GENDER}</p>
-        <p><strong>DNI:</strong> ${DNI}</p>
-        <p><strong>Código Postal:</strong> ${CP}</p>
-        <p><strong>Estado Civil:</strong> ${MARITALSTATUS}</p>
-        <p><strong>Número de empleado:</strong> ${EMPLOYEENUMB}</p>
-        <p><strong>Usuario:</strong> ${USER}</p>
-        <p><strong>Departamento:</strong> ${DEPARTMENT}</p>
-        <p><strong>Fecha de inicio:</strong> ${STARTDATE}</p>
-        <p><strong>Dirección Postal:</strong> ${POSTALADDRESS}</p>
-        <p><strong>Correo Electrónico:</strong> ${EMAIL}</p>
-        <p><strong>Teléfono Móvil:</strong> ${MOBILE}</p>
-        <p><strong>Fecha de Nacimiento:</strong> ${BIRTHDATE}</p>
-        <p><strong>Lugar de Nacimiento:</strong> ${PLACEOFBIRTH}</p>
-        <p><strong>Contraseña:</strong> ${PASSWORD}</p>
-        <p><strong>Horas de Trabajo:</strong> ${WORKHOURS}</p>
-        <p><strong>Nivel de Educación:</strong> ${LEVELEDUCATION}</p>
-        <p><strong>Inglés:</strong> ${ENGLISH}</p>
-        <p><strong>Catalán:</strong> ${CATALAN}</p>
-        <p><strong>Español:</strong> ${SPANISH}</p>
-        <p><strong>Otros Idiomas:</strong> ${OTHERS}</p>
-        <p><strong>Tipo de Tarjeta:</strong> ${CARD}</p>
-        <p><strong>Número de Tarjeta:</strong> ${CARDNUMBER}</p>
-        <p><strong>CVC:</strong> ${CVC}</p>
-        <p><strong>Fecha de Expiración:</strong> ${EXPIRATIONDATE}</p>
-        <p><strong>Color:</strong> ${COLOR}</p>
-        <p><strong>Enlaces Sociales:</strong> ${SOCIAL}</p>
-        <p><strong>Comentarios:</strong> ${COMMENTS}</p>
-    `;
+        // Muestra los datos en el elemento data-display
+        var dataDisplay = document.querySelector('.data-display');
+        dataDisplay.innerHTML = dataString;
 
-    // Muestra los datos en el elemento data-display
-    const dataDisplay = document.querySelector('.data-display');
-    dataDisplay.innerHTML = dataString;
+    } else {
+        alert("Por favor, rellena correctamente todos los campos.");
+    }
 }
-
-
-
 
 /**
  * Validates all input fields in the form.
  * @returns {boolean} Returns true if all input fields are valid, false otherwise.
  */
 function validarInputs() {
-    const form = document.getElementById('form');
-    var formulario = new FormData('form');
-
-    var inputs = formulario.forEach(i => i.text);
 	var isValid = true;
+    var elementos = ['name','surname1','surname2','user','department']
 	isValid = isValid && validarGenero();
 	isValid = isValid && validarTextoSimple();
 	isValid = isValid && validarCodigoPostal();
