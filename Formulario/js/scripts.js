@@ -29,16 +29,12 @@ const LEVEL = {
 }
 
 function validateForm() {
-    if (validarInputs())
-    {
-        mostrarDatos();
-        return true;
-    }
-    return false;
+    mostrarDatos();
+    return true;
 }
 
 function mostrarDatos() {
-    if (validarInputs())
+    if (validarInpt())
     {
         var NAME = document.forms["registrationForm"]["name"].value;
         var SURNAME1 = document.forms["registrationForm"]["surname1"].value;
@@ -121,21 +117,30 @@ function mostrarDatos() {
 function validarInputs() {
 	var isValid = true;
     var elementos = ['name','surname1','surname2','user','department']
-	isValid = isValid && validarGenero();
-	isValid = isValid && validarTextoSimple();
-	isValid = isValid && validarCodigoPostal();
+    for (let i = 0; i < elementos.length; i++) {
+        isValid = isValid && validarTextoSimple(elementos[i]);
+    }
+    isValid = isValid && validarGenero();
+    isValid = isValid && validarCodigoPostal();
 	isValid = isValid && validarDNI();
 	isValid = isValid && validarEmail();
 	isValid = isValid && validarTelefono();
-	isValid = isValid && validarCumpleaños();
+	
 	isValid = isValid && validarEstadoCivil();
 	isValid = isValid && validarSoloNumero();
 	isValid = isValid && validarContraseña();
-	isValid = isValid && validarNivelIngles();
+    var idiomas = ['englishLevel', 'catalanLevel', 'spanishLevel']
+    for (let i = 0; i < idiomas.length; i++) {
+        isValid = isValid && validarNivelIdioma(idiomas[i]);
+    }
 	isValid = isValid && validarMetodoPago();
 	isValid = isValid && validarColorHexadecimalCorrecto();
 
 	return isValid;
+}
+
+function validarInpt() {
+    return true;
 }
 
 /**
