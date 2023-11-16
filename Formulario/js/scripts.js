@@ -143,6 +143,14 @@ function validarInpt() {
     return true;
 }
 
+
+
+
+//////////////////////////////////////////////////////////
+//// Funciones de validación de campos de formulario /////
+//////////////////////////////////////////////////////////
+
+
 /**
  * Sets an error message for a given input field.
  * @param {string} message - The error message to display.
@@ -171,9 +179,12 @@ function conversorFecha(fecha) {
 function validarTextoSimple(fieldName) {
 
 	let nameInput = document.getElementById(fieldName);
-	const regex = /^[a-zA-Z\s]*$/; // Expresión regular que permite letras mayúsculas, minúsculas y espacios.
+	
+    // Expresión regular que permite letras mayúsculas, minúsculas, espacios y acentos:
+    const regex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s]*$/;
+
 	if (!regex.test(nameInput.value)) {
-		setErrorMessage('El nombre solo debe contener letras mayúsculas, minúsculas o espacios.', fieldName);
+		setErrorMessage('El nombre solo debe contener letras mayúsculas, minúsculas, espacios y acentos.', fieldName);
         return false;
     } else {
 		setErrorMessage('', fieldName);
@@ -210,6 +221,17 @@ function validarCodigoPostal() {
         return true;
     }
 }
+
+function calcularResto(numero) {
+    return numero % 23;
+}
+
+function obtenerLetraDNI(resto) {
+    var tablaDigitos = ["T","R","W","A","G","M","Y","F","P","D","X","B","N","J","Z","S","Q","V","H","L","C","K","E"]
+    return tablaDigitos[resto];
+}
+
+
 /**
  * Validates a Spanish DNI number.
  * @return {boolean} Returns true if the DNI is valid, false otherwise.
@@ -221,6 +243,14 @@ function validarDNI() {
         setErrorMessage('El DNI debe contener 8 dígitos y una letra mayúscula.', 'dni');
         return false;
     } else {
+        let numero = dni.value.substring(0,8);
+        let letra = dni.value.substring(8,9);
+        let resto = calcularResto(numero);
+        let letraDNI = obtenerLetraDNI(resto);
+        if (letraDNI != letra) {
+            setErrorMessage('El DNI no existe.', 'dni');
+            return false;
+        }
         setErrorMessage('', 'dni');
         return true;
     }
@@ -388,20 +418,45 @@ function validarNivelIdioma(id) {
  * @returns {boolean} Returns true if the payment method is valid, false otherwise.
  */
 function validarMetodoPago() {
+    const cardType = document.getElementById('cardType');
     const cardNumber = document.getElementById('cardNumber');
     const cvc = document.getElementById('cvc');
     const expirationDate = document.getElementById('expirationDate');
 
+    // Expresión regular que permite solo PayPal, MasterCard o Visa.
+    const regexCardType = /^(PayPal|MasterCard|Visa)$/;
     const regexCardNumber = /^[0-9]{16}$/; // Expresión regular que permite solo 16 dígitos.
     const regexCvc = /^[0-9]{3}$/; // Expresión regular que permite solo 3 dígitos.
-    const regexExpirationDate = /^[0-9]{2}\/[0-9]{2}$/; // Expresión regular que permite una fecha válida.
+    const regexExpirationDate = /^(\d{2})-(\d{2})-(\d{4})$/; // Expresión regular que permite una fecha válida.
 
-    if (!regexCardNumber.test(cardNumber.value) && !regexCvc.test(cvc.value) && !regexExpirationDate.test(expirationDate.value)) {
+    if (!regexCardType.test(cardType.value) && !regexCardNumber.test(cardNumber.value) && !regexCvc.test(cvc.value) && !regexExpirationDate.test(expirationDate.value)) {
         setErrorMessage('Los datos de pago introducidos son incorrectos', 'expirationDate');
         return false;
     } else {
-        setErrorMessage('', 'expirationDate');
-        return true;
+        // Validar la fecha de expiración
+        let dateParts = expirationDate.value.split("-");
+        let day = dateParts[0];
+        let month = dateParts[1];
+        let year = dateParts[2];
+        let formattedDate = `${day}-${month}-${year}`;
+
+        let date = conversorFecha(formattedDate);
+        if (date === null) {
+            setErrorMessage('La fecha debe ser válida (dd-MM-yyyy).', 'expirationDate');
+            return false;
+        } else {
+            let today = new Date();
+
+            if (date < today) {
+                setErrorMessage('La fecha no puede ser del pasado.', 'expirationDate');
+                return false;
+            } else {
+                setErrorMessage('', 'expirationDate');
+                return true;
+            }
+            
+        }
+
     }
 }
 /**

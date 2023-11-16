@@ -87,7 +87,8 @@
                         </div>
                         <div class="form-group">
                             <label for="birthplace">Place of birth:</label>
-                            <input type="text" class="form-control" id="birthplace" name="birthplace">
+                            <input type="text" class="form-control" id="birthplace" name="birthplace" onblur="validaTextoSimple('birthplace')">
+                            <span id="birthplace-error" class="error-message"></span>
                         </div>
                         <div class="form-group">
                             <label for="maritalStatus">*Marital status (S/C/V/D):</label>
@@ -161,7 +162,7 @@
                             <input type="text" class="form-control" id="otherLanguages" name="otherLanguages">
                         </div>
                     </div>
-                    <h2 style="text-align: center;">Payment method</h2>
+                    <h2 style="text-align: center;">Payment method (PayPal, Visa, MasterCard)</h2>
                     <div class="row justify-content-center">
                         <div class="form-group col">
                             <label for="cardType">Card type:</label>
