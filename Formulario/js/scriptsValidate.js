@@ -1,6 +1,15 @@
 
-
-
+var validadorTexto;
+var validadorGenero;
+var validadorCodigoPostal;
+var validadorDNI;
+var maritalStatusValidador;
+var validadorEmployeeNumber;
+var validadorFechaInicio;
+var validadorNivelIdioma;
+var validadorColorHexadecimal;
+var validadorSocialLink;
+var validadorHorasTrabajadas;
 
 function createCSV() {
     const data = `
@@ -143,7 +152,14 @@ function validarInputs() {
 }
 
 function validarInpt() {
-    return true;
+    if(validadorTexto && validadorGenero && validadorCodigoPostal && validadorDNI & maritalStatusValidador
+        && validadorEmployeeNumber && validadorFechaInicio &&validadorColorHexadecimal && validadorSocialLink
+        && validadorNivelIdioma && validadorHorasTrabajadas){
+        return true;
+    }else{
+        return false;
+    }
+    
 }
 
 
@@ -187,11 +203,13 @@ function validarTextoSimple(fieldName) {
     const regex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s]*$/;
 
 	if (!regex.test(nameInput.value)) {
+        validadorTexto = false;
 		setErrorMessage('El nombre solo debe contener letras mayúsculas, minúsculas, espacios y acentos.', fieldName);
-        return false;
-    } else {
+        return validadorTexto;
+    } else if(regex.test(nameInput.value)) {
+        validadorTexto = true;
 		setErrorMessage('', fieldName);
-        return true;
+        return validadorTexto;
 	} 
 }
 /**
@@ -203,10 +221,12 @@ function validarGenero() {
     const regex = /^[HM]$/; // Expresión regular que permite solo H o M.
     if (!regex.test(gender.value)) {
         setErrorMessage('El género solo debe contener H o M.', 'gender');
-        return false;
+        validadorGenero = false;
+        return validadorGenero;
     } else {
+        validadorGenero = true;
         setErrorMessage('', 'gender'); // Para borrar el mensaje de error
-        return true;
+        return validadorGenero;
     }
 }
 /**
@@ -217,11 +237,13 @@ function validarCodigoPostal() {
     const cp = document.getElementById('cp');
     const regex = /^[0-9]{5}$/; // Expresión regular que permite solo 5 dígitos.
     if (!regex.test(cp.value)) {
+        validadorCodigoPostal = false;
         setErrorMessage('El código postal solo debe contener 5 dígitos.', 'cp');
-        return false;
+        return validadorCodigoPostal;
     } else {
+        validadorCodigoPostal = true;
         setErrorMessage('', 'cp');
-        return true;
+        return validadorCodigoPostal;
     }
 }
 
@@ -251,11 +273,13 @@ function validarDNI() {
         let resto = calcularResto(numero);
         let letraDNI = obtenerLetraDNI(resto);
         if (letraDNI != letra) {
+            validadorDNI = false;
             setErrorMessage('El DNI no existe.', 'dni');
-            return false;
+            return validadorDNI;
         }
+        validadorDNI = true;
         setErrorMessage('', 'dni');
-        return true;
+        return validadorDNI;
     }
 }
 /**
@@ -266,11 +290,13 @@ function validarEmail() {
     const email = document.getElementById('email');
     const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/; // Expresión regular que permite un email válido.
     if (!regex.test(email.value)) {
+        validadorEmail = false;
         setErrorMessage('El email debe ser válido.', 'email');
-        return false;
+        return validadorEmail;
     } else {
+        validadorEmail = true;
         setErrorMessage('', 'email');
-        return true;
+        return validadorEmail;
     }
 }
 /**
@@ -281,11 +307,13 @@ function validarTelefono() {
     const phone = document.getElementById('mobile');
     const regex = /^[0-9]{9}$/; // Expresión regular que permite 9 dígitos.
     if (!regex.test(phone.value)) {
+        validadorTelefono = false;
         setErrorMessage('El teléfono debe contener 9 dígitos.', 'mobile');
-        return false;
+        return validadorTelefono;
     } else {
+        validadorTelefono = true;
         setErrorMessage('', 'mobile');
-        return true;
+        return validadorTelefono;
     }
 }
 /**
@@ -299,9 +327,10 @@ function validarFNacimiento() {
     // Validar el formato "dd-MM-yyyy"
     let regex = /^(\d{2})-(\d{2})-(\d{4})$/;
     if (!regex.test(birthday.value)) {
+        validadorFnacimiento = false;
         setErrorMessage('La fecha debe ser válida (dd-MM-yyyy).', 'birthdate');
         
-        return false;
+        return validadorFnacimiento;
     }
 
     // Convertir la fecha al formato "día-mes-año"
@@ -313,18 +342,21 @@ function validarFNacimiento() {
 
     let date = conversorFecha(formattedDate);
     if (date === null) {
+        validadorFnacimiento = false;
         setErrorMessage('La fecha debe ser válida (dd-MM-yyyy).', 'birthdate');
-        return false;
+        return validadorFnacimiento;
     }
     else {
         let today = new Date();
 
         if (date > today) {
+            validadorFnacimiento = false;
             setErrorMessage('La fecha no puede ser futura.', 'birthdate');
-            return false;
+            return validadorFnacimiento;
         } else {
+        validadorFnacimiento = true;
         setErrorMessage('', 'birthdate');
-        return true;
+        return validadorFnacimiento;
         }
         
     }
@@ -337,11 +369,13 @@ function validarEstadoCivil() {
     let maritalStatus = document.getElementById('maritalStatus');
     const regex = /^[SCVD]$/; // Expresión regular que permite solo S(soltero), C(casado), V(viudo) o D(divorciado).
     if (!regex.test(maritalStatus.value)) {
+        maritalStatusValidador = false;
         setErrorMessage('El estado civil no es correcto.', 'maritalStatus');
-        return false;
+        return maritalStatusValidador;
     } else {
+        maritalStatusValidador = true;
         setErrorMessage('', 'maritalStatus');
-        return true;
+        return maritalStatusValidador;
     }
 }
 /**
@@ -352,11 +386,13 @@ function validarSoloNumero() {
     let employeeNumber = document.getElementById('employeeNumber');
     const regex = /^[0-9]*$/; // Expresión regular que permite solo números.
     if (!regex.test(employeeNumber.value)) {
+        validadorEmployeeNumber = false;
         setErrorMessage('El número de empleado solo debe contener números.', 'employeeNumber');
-        return false;
+        return validadorEmployeeNumber;
     } else {
+        validadorEmployeeNumber = true;
         setErrorMessage('', 'employeeNumber');
-        return true;
+        return validadorEmployeeNumber;
     }
 }
 /**
@@ -369,8 +405,9 @@ function validarFechaInicio() {
     // Validar el formato "dd-MM-yyyy"
     let regex = /^(\d{2})-(\d{2})-(\d{4})$/;
     if (!regex.test(startDate.value)) {
+        validadorFechaInicio = false;
         setErrorMessage('La fecha debe ser válida (dd-MM-yyyy).', 'startDate');
-        return false;
+        return validadorFechaInicio;
     }
 
     // Convertir la fecha al formato "día-mes-año"
@@ -382,8 +419,9 @@ function validarFechaInicio() {
 
     let date = conversorFecha(formattedDate);
     if (date === null) {
+        validadorFechaInicio = false;
         setErrorMessage('La fecha debe ser válida (dd-MM-yyyy).', 'startDate');
-        return false;
+        return validadorFechaInicio;
     }
     else {
         let today = new Date();
@@ -392,8 +430,9 @@ function validarFechaInicio() {
             setErrorMessage('La fecha no puede ser futura.', 'startDate');
             return false;
         } else {
+            validadorFechaInicio = true;
         setErrorMessage('', 'startDate');
-        return true;
+        return validadorFechaInicio;
         }
         
     }
@@ -409,11 +448,13 @@ function validarNivelIdioma(id) {
     const englishLevelValue = englishLevelInput.value;
 
     if (Object.values(LEVEL).includes(englishLevelValue)) {
+        validadorNivelIdioma = true;
         setErrorMessage('', id);
-        return true;
+        return validadorNivelIdioma;
     } else {
+        validadorNivelIdioma = false;
         setErrorMessage('El nivel de idioma no existe.', id);
-        return false;
+        return validadorNivelIdioma;
     }
 }
 /**
@@ -433,8 +474,9 @@ function validarMetodoPago() {
     const regexExpirationDate = /^(\d{2})-(\d{2})-(\d{4})$/; // Expresión regular que permite una fecha válida.
 
     if (!regexCardType.test(cardType.value) && !regexCardNumber.test(cardNumber.value) && !regexCvc.test(cvc.value) && !regexExpirationDate.test(expirationDate.value)) {
+        validadorMetodoPago = false;
         setErrorMessage('Los datos de pago introducidos son incorrectos', 'expirationDate');
-        return false;
+        return validadorMetodoPago;
     } else {
         // Validar la fecha de expiración
         let dateParts = expirationDate.value.split("-");
@@ -451,11 +493,13 @@ function validarMetodoPago() {
             let today = new Date();
 
             if (date < today) {
+                validadorMetodoPago = false;
                 setErrorMessage('La fecha no puede ser del pasado.', 'expirationDate');
-                return false;
+                return validadorMetodoPago;
             } else {
+                validadorMetodoPago = true;
                 setErrorMessage('', 'expirationDate');
-                return true;
+                return validadorMetodoPago;
             }
             
         }
@@ -470,14 +514,16 @@ function validarColorHexadecimalCorrecto() {
     const color = document.getElementById('color');
     const regex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/; // Expresión regular que permite un color hexadecimal.
     if (!regex.test(color.value)) {
+        validadorColorHexadecimal = false;
         setErrorMessage('El color debe ser hexadecimal.', 'color');
-        return false;
+        return validadorColorHexadecimal;
     } else {
+        validadorColorHexadecimal = true;
         setErrorMessage('', 'color');
         // mensaje con el color introducido
         const colorInput = document.getElementById('colorInput');
         colorInput.style.backgroundColor = color.value;
-        return true;
+        return validadorColorHexadecimal;
 
     }
 
@@ -493,11 +539,13 @@ function validarSocialLink() {
     const regex = /^(https?:\/\/)?(www\.)?([a-zA-Z]+)\.com\/.*/i;
 
     if (!regex.test(socialLinks.value)) {
+        validadorSocialLink = false;
         setErrorMessage('Introduce un enlace válido de Facebook, Instagram u otra red social.', 'socialLinks');
-        return false;
+        return validadorSocialLink;
     } else {
+        validadorSocialLink = true;
         setErrorMessage('', 'socialLinks');
-        return true;
+        return validadorSocialLink;
     }
 }
 
@@ -521,10 +569,12 @@ function validarHorasTrabajadas() {
 	const workHours = document.getElementById("workHours");
 	const regex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
 	if (!regex.test(workHours.value)) {
+        validadorHorasTrabajadas = false;
 		setErrorMessage('El formato de hora es incorrecto (HH:mm)', 'workHours');
-        return false;
+        return validadorHorasTrabajadas;
 	} else {
+        validadorHorasTrabajadas = true;
 		setErrorMessage('', 'workHours');
-        return true;
+        return validadorHorasTrabajadas;
 	}
 }

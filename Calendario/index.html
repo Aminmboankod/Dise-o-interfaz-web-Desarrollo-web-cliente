@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Calendario Diciembre 2023</title>
+</head>
+<body>
+
+    <div class="calendar container">
+        <!-- <h1>Calendario Diciembre 2023</h1>
+        <div class="weekdays row">
+            <div class="day col text-center">Lun</div>
+            <div class="day col text-center">Mar</div>
+            <div class="day col text-center">Mié</div>
+            <div class="day col text-center">Jue</div>
+            <div class="day col text-center">Vie</div>
+            <div class="day col text-center">Sáb</div>
+            <div class="day col text-center">Dom</div>
+        </div>
+        <div class="days">
+        </div> -->
+
+    </div>
+
+    <script>
+
+        const diaSemana = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"];
+
+        const meses = [
+            { numero: 1, nombre: 'Enero', duracion: 31 },
+            { numero: 2, nombre: 'Febrero', duracion: 29 },
+            { numero: 3, nombre: 'Marzo', duracion: 31 },
+            { numero: 4, nombre: 'Abril', duracion: 30 },
+            { numero: 5, nombre: 'Mayo', duracion: 31 },
+            { numero: 6, nombre: 'Junio', duracion: 30 },
+            { numero: 7, nombre: 'Julio', duracion: 31 },
+            { numero: 8, nombre: 'Agosto', duracion: 31 },
+            { numero: 9, nombre: 'Septiembre', duracion: 30 },
+            { numero: 10, nombre: 'Octubre', duracion: 31 },
+            { numero: 11, nombre: 'Noviembre', duracion: 30 },
+            { numero: 12, nombre: 'Diciembre', duracion: 31 }
+        ];
+
+        function crearListaDias(){
+            const contenedorMes = document.createElement('div');
+            contenedorMes.classList.add('weekdays', 'row');
+
+            diaSemana.forEach(dia => {
+                const divDia = document.createElement('div');
+                divDia.classList.add('day', 'col', 'text-center');
+                divDia.textContent = dia;                
+            });
+        }
+
+        function añadirDiasMes(mes){
+            
+            const daysContainer = document.createElement('div');
+            daysContainer.classList.add('.days');
+
+            const days = crearNumeroDias(mes.duracion);
+
+            for (let i = 0; i < mes.duracion +1; i++) {
+
+                const row = document.createElement('div');
+                row.classList.add('row');
+                const dayIndex = i;
+
+                const day = days[dayIndex];
+                const dayElement = document.createElement('div');
+                dayElement.classList.add( 'col', day.className);
+                dayElement.textContent = day.day;
+                row.appendChild(dayElement);
+                
+                daysContainer.appendChild(row);
+            }
+
+        }
+
+        function CrearCalendario(){
+
+            meses.forEach(mes => {
+                crearListaDias();
+                añadirDiasMes(mes);
+            })
+
+
+        }
+
+        function crearNumeroDias(duracion){
+            const days = [];
+            for (let i = 1; i <= duracion; i++) {
+                if (i % 2 === 0) {
+                    days.push({
+                        day: i,
+                        className: 'even'
+                    });
+                } else {
+                    days.push({
+                        day: i,
+                        className: 'odd'
+                    });
+                }
+            }  
+            
+            return days;
+        }
+
+        CrearCalendario();
+        // const daysContainer = document.querySelector('.days');
+
+        // for (let i = 0; i < days.length+1; i++) {
+
+        //     const row = document.createElement('div');
+        //     row.classList.add('row');
+        //     const dayIndex = i;
+
+        //     const day = days[dayIndex];
+        //     const dayElement = document.createElement('div');
+        //     dayElement.classList.add( 'col', day.className);
+        //     dayElement.textContent = day.day;
+        //     row.appendChild(dayElement);
+            
+        //     daysContainer.appendChild(row);
+        // }
+    </script>
+</body>
+</html>
