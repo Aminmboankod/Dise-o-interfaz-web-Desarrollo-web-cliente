@@ -8,24 +8,11 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Calendario Diciembre 2023</title>
+    <title>Calendario 2024</title>
 </head>
 <body>
 
-    <div class="calendar container">
-        <!-- <h1>Calendario Diciembre 2023</h1>
-        <div class="weekdays row">
-            <div class="day col text-center">Lun</div>
-            <div class="day col text-center">Mar</div>
-            <div class="day col text-center">Mié</div>
-            <div class="day col text-center">Jue</div>
-            <div class="day col text-center">Vie</div>
-            <div class="day col text-center">Sáb</div>
-            <div class="day col text-center">Dom</div>
-        </div>
-        <div class="days">
-        </div> -->
-
+    <div class="container">
     </div>
 
     <script>
@@ -47,51 +34,6 @@
             { numero: 12, nombre: 'Diciembre', duracion: 31 }
         ];
 
-        function crearListaDias(){
-            const contenedorMes = document.createElement('div');
-            contenedorMes.classList.add('weekdays', 'row');
-
-            diaSemana.forEach(dia => {
-                const divDia = document.createElement('div');
-                divDia.classList.add('day', 'col', 'text-center');
-                divDia.textContent = dia;                
-            });
-        }
-
-        function añadirDiasMes(mes){
-            
-            const daysContainer = document.createElement('div');
-            daysContainer.classList.add('.days');
-
-            const days = crearNumeroDias(mes.duracion);
-
-            for (let i = 0; i < mes.duracion +1; i++) {
-
-                const row = document.createElement('div');
-                row.classList.add('row');
-                const dayIndex = i;
-
-                const day = days[dayIndex];
-                const dayElement = document.createElement('div');
-                dayElement.classList.add( 'col', day.className);
-                dayElement.textContent = day.day;
-                row.appendChild(dayElement);
-                
-                daysContainer.appendChild(row);
-            }
-
-        }
-
-        function CrearCalendario(){
-
-            meses.forEach(mes => {
-                crearListaDias();
-                añadirDiasMes(mes);
-            })
-
-
-        }
-
         function crearNumeroDias(duracion){
             const days = [];
             for (let i = 1; i <= duracion; i++) {
@@ -111,23 +53,62 @@
             return days;
         }
 
-        CrearCalendario();
-        // const daysContainer = document.querySelector('.days');
+        function crearListaDias(container){
 
-        // for (let i = 0; i < days.length+1; i++) {
+            const contenedorMes = document.createElement('div');
+            contenedorMes.classList.add('weekdays', 'row');
+            container.appendChild(contenedorMes);
 
-        //     const row = document.createElement('div');
-        //     row.classList.add('row');
-        //     const dayIndex = i;
+            diaSemana.forEach(dia => {
+                const divDia = document.createElement('div');
+                divDia.classList.add('day', 'col', 'text-center');
+                divDia.textContent = dia;                
+                contenedorMes.appendChild(divDia);
+            });
 
-        //     const day = days[dayIndex];
-        //     const dayElement = document.createElement('div');
-        //     dayElement.classList.add( 'col', day.className);
-        //     dayElement.textContent = day.day;
-        //     row.appendChild(dayElement);
+        }
+
+        function añadirDiasMes(mes){
             
-        //     daysContainer.appendChild(row);
-        // }
+            const daysContainer = document.createElement('div');
+            daysContainer.classList.add('days');
+
+            const days = crearNumeroDias(mes.duracion);
+
+            days.forEach(dia => {
+                const dayElement = document.createElement('div');
+                dayElement.classList.add( 'col', dia.className);
+                dayElement.textContent = dia.day;
+                daysContainer.appendChild(dayElement);
+            })
+
+            return daysContainer;
+
+        }
+
+        function CrearCalendario(){
+
+            meses.forEach(mes => {
+                const main = document.querySelector('.container');
+                const cont = document.createElement('div');
+                cont.classList.add('calendar-'+mes.nombre);
+                
+                const titulo = document.createElement('h1');
+                titulo.classList.add('row', 'text-center');
+                titulo.textContent = mes.nombre;
+                cont.appendChild(titulo);
+                main.appendChild(cont);
+                
+                crearListaDias(cont);
+                const contenedorDias = añadirDiasMes(mes);
+                cont.appendChild(contenedorDias);
+            })
+
+
+        }
+
+        CrearCalendario();
+
     </script>
 </body>
 </html>

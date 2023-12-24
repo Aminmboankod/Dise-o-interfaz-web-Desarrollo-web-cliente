@@ -1,0 +1,46 @@
+$rose: #ff66b2;
+$white: #ffffff;
+
+.calendar {
+  display: grid;
+  text-align: center;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: $rose;
+  color: $white;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.day {
+  padding: 10px;
+  text-align: center;
+}
+
+.even {
+    padding: 30px;
+    background-color: $rose;
+    color: $white;
+    text-align: center;
+}
+
+.odd {
+    padding: 30px;
+    background-color: $white;
+    color: $rose;
+    text-align: center;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+/* Puedes personalizar el estilo de los días según tu preferencia */
+.days .day {
+  padding: 10px;
+  border: 1px solid $rose;
+}
